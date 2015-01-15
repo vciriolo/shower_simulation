@@ -1,0 +1,5 @@
+#!/bin/sh
+
+/afs/cern.ch/user/n/ntrevisa/geant4/shower/build/shower 300
+
+cp 300GeV.root /afs/cern.ch/user/n/ntrevisa/public

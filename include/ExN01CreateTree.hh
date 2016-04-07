@@ -24,7 +24,9 @@ public:
   
   CreateTree (TString name);
 
+  
   ~CreateTree () ;
+  
   
   TTree*             GetTree  () const { return ftree ; } ;
   TString            GetName  () const { return fname ; } ;
@@ -35,15 +37,19 @@ public:
   static CreateTree* Instance () { return fInstance ; } ;
   static CreateTree* fInstance ;
   
+  
   int   Event ;
 
   float EnergyTotalCalo ;
   float EnergyTotalAbs1 ;
   float EnergyTotalAbs2 ;
-
+  //float molt2;
+  float EnergyTotal;
   std::vector<float> * Q1 ;
   std::vector<float> * Q2 ;
-
+  std::vector<float> * E_sec;
+  std::vector<float> * mult;
+  //std::vector<float> * EnergyTotal;
 } ;
 
 #endif

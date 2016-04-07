@@ -31,9 +31,9 @@
 // --------------------------------------------------------------
 //      GEANT 4 - exampleN01
 // --------------------------------------------------------------
-
-//#include "G4EmUserPhysics.hh"
-
+#include "G4Track.hh"
+#include "G4EmUserPhysics.hh"
+//#include "GV4UserTrackInformation.hh"
 #include "ExN01EventAction.hh"
 #include "ExN01CreateTree.hh"
 
@@ -52,31 +52,67 @@
 #include "ExN01SteppingAction.hh"
 
 #include "ExN01RandomGenerator.hh"
-
+/*
 #ifdef G4VIS_USE
 #include "G4VisExecutive.hh"
 #include "ExN01VisAction.hh"
 #endif
+*/
+#include "G4SystemOfUnits.hh"
 
 #ifdef G4UI_USE
 #include "G4UIExecutive.hh"
 #endif
 
+#include "G4TrajectoryGenericDrawer.hh"
+#include "UserTrackingAction.hh"
+
+
+#include "G4Run.hh"
+#include "G4RunManager.hh" 
+#include "G4UImanager.hh"
+#include "G4UIsession.hh"
+#include "G4UIterminal.hh"
+#include "globals.hh"
+//#include "DetectorConstruction.hh"
+//#include "PhysicsList.hh"
+//#include "PrimaryGenerator.hh"
+//#include "UserRunAction.hh"
+//#include "UserEventAction.hh"
+#include "UserTrackingAction.hh"
+#ifdef G4VIS_USE
+#include "G4VisExecutive.hh"
+//#include "G4TrajectoryGenericDrawer.hh"
+#include "ExN01VisAction.hh"
+#include "B1Run.hh"
+#include "B1RunAction.hh"
+//#include "B1ActionInitialization.hh"
+
+#endif
+
+
 using namespace CLHEP;
 using namespace std;
 
-int main(int argc,char** argv)
+int main(int argc,char** argv) 
 {
-  float energia;
+  float energia, stepEnergyTotal;
   TString nome_file;
   
-  if ( argc == 2 )
+  if ( argc >= 2 )
   	{
 	TString argomento = (argv[1]);
-	nome_file = argomento + "GeV.root";		
+	nome_file = argomento + "GeV_6X0_05cm2.root";
+//nome_file = "test.root";				
   	energia = atof (argv[1]);
   	}
   
+  else {
+    cout<<"please insert the energy of incoming electron in GeV"<<endl;
+    return 0;
+    }
+  
+  nome_file = "test_060416.root";
   cout<<nome_file<<endl;
     	
   // Construct the default run manager
@@ -91,43 +127,111 @@ int main(int argc,char** argv)
   G4VUserPhysicsList* physics = new ExN01PhysicsList;
   runManager->SetUserInitialization(physics);
 
+//runManager->SetUserInitialization(new B1ActionInitialization());
+
   // set mandatory user action class
   
 
-  std::string name = ("/afs/cern.ch/user/n/ntrevisa/geant4/molteplice/profile_beam.root");
+  //std::string name = ("/afs/cern.ch/user/n/ntrevisa/geant4/molteplice/profile_beam.root");
+    //std::string name = ("/afs/cern.ch/user/n/ntrevisa/public/profile_beam.root");
+    std::string name = ("/afs/cern.ch/user/v/vciriolo/public/profile_beam.root");
   G4VUserPrimaryGeneratorAction* gen_action = new ExG4PrimaryGeneratorAction01(name,energia);
   runManager->SetUserAction(gen_action);
-
+cout<<"check1"<<endl;
   //Creating Tree
+     TFile *output = new TFile(nome_file,"RECREATE");
     CreateTree* mytree = new CreateTree ("tree") ; 
 
-  G4UserEventAction* event_action = new EventAction();
+  //G4UserEventAction* event_action = new EventAction();
+  EventAction* event_action = new EventAction();
+//G4UserEventAction* event_action = new ExN01EventAction();
   runManager->SetUserAction(event_action);
 
-    
-  G4UserSteppingAction* stpAct = new SteppingAction();
-  runManager->SetUserAction(stpAct);
+    runManager->SetUserAction(new B1RunAction);
+  G4UserSteppingAction* stpAct = new SteppingAction(event_action);
+//G4UserSteppingAction* stpAct = new ExN01SteppingAction();
+ runManager->SetUserAction(stpAct);
+  
+  //UserTrackingAction* trackingAction = new UserTrackingAction();
+  //runManager->SetUserAction(trackingAction);
+
   
   runManager->Initialize();
+ // G4int numberOfEvent = 100;
+  //runManager->BeamOn(numberOfEvent);
+  
+//  G4Double EnergyTotal = event_action->AddEdep();
+//CreateTree::Instance() -> EnergyTotal->push_back( stepEnergyTotal);
+/*
+if(step -> GetTrack() -> GetTrackID() == 1) {
+
+  DetectorHit* hit = new DetectorHit();
+
+  hit -> SetEnergyDeposit(energyDeposit);
+  hit -> SetBinCenter(binCenter);
+  hitsCollection -> insert(hit);
+}
+*/
+/*UserTrackingAction *usrtract = new UserTrackingAction();
+ustract->counter(0) {
+
+}
+*/
+
+/*void UserTrackingAction::UserPostTrackingAction(const G4Track*) {
+
+  // The user tracking action class holds the pointer to the tracking manager:
+  // fpTrackingManager
+
+  // From the tracking manager we can retrieve the secondary track vector,
+  // which is a container class for tracks:
+  G4TrackVector* secTracks = fpTrackingManager -> GimmeSecondaries();
+
+  // You can use the secTracks vector to retrieve the number of secondary 
+  // electrons
+  if(secTracks) { 
+     size_t nmbSecTracks = (*secTracks).size();       
+
+     for(size_t i = 0; i < nmbSecTracks; i++) { 
+        if((*secTracks)[i] -> GetDefinition() == G4Electron::Definition()) 
+              counter++;
+     }
+  }
+}
+*/
+
+
+
+  
+  
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
 #ifdef G4VIS_USE
   // Initialize visualization                                                                                                                               
-  G4VisManager* visManager = new G4VisExecutive;
+G4VisManager* visManager = new G4VisExecutive;
   // G4VisExecutive can take a verbosity argument - see /vis/verbose guidance.                                                                              
-  // G4VisManager* visManager = new G4VisExecutive("Quiet");                                                                                                
+  //G4VisManager* visManager = new G4VisExecutive("Quiet");                                                                                                
   visManager->Initialize();
+  
+  //G4TrajectoryGenericDrawer* genDrawer = new G4TrajectoryGenericDrawer;
+  //visManager -> RegisterModel(genDrawer);
 #endif
+    cout<<"check2"<<endl;
   // Get the pointer to the User Interface manager                                                                                                          
   G4UImanager* UImanager = G4UImanager::GetUIpointer();
-  if (argc!=1) {
-    // batch mode                                                                                                                                           
+  if (argc>2) {
+    // batch mode                 
+cout<<"check2if"<<endl;                                                                                                                          
     G4String command = "/control/execute ";
-    G4String fileName = argv[1];
+    G4String fileName = argv[2];
+       cout<<"checkUImanager"<<endl;
     UImanager->ApplyCommand(command+fileName);
+    cout<<"checkApllyCommand"<<endl;
   }
   else{
-    // interactive mode : define UI session                                                                                                                 
+    cout<<"checkElse"<<endl;
+    // interactive mode : define UI session                                                                                                                
+
 #ifdef G4UI_USE
     G4UIExecutive* ui = new G4UIExecutive(argc, argv);
 #ifdef G4VIS_USE
@@ -137,10 +241,13 @@ int main(int argc,char** argv)
     delete ui;
 #endif
   }
+  
 #ifdef G4VIS_USE
   delete visManager;
 #endif
-*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    cout<<"check3"<<endl;
+*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // Get the pointer to the UI manager and set verbosities
   //
@@ -149,17 +256,24 @@ int main(int argc,char** argv)
   UI->ApplyCommand("/event/verbose 0");
   UI->ApplyCommand("/tracking/verbose 0");
 
+// TFile *output = new TFile(nome_file,"RECREATE");
+
 
   // Start a run
   //
 
-  G4int numberOfEvent = 15000;
-  runManager->BeamOn(numberOfEvent);
+   // G4int numberOfEvent = 5;
+    G4int numberOfEvent = 100;
+    cout<<"check4"<<endl;
+   runManager->BeamOn(numberOfEvent);
   
-
-  TFile *output = new TFile(nome_file,"RECREATE");
-  mytree->Write(output);
-  output->Close();
+   cout<<"checkBeamON"<<endl;
+  
+  
+   
+  // TFile *output = new TFile(nome_file,"RECREATE");
+   mytree->Write(output);
+   output->Close();
   // Job termination
   //
   // Free the store: user actions, physics_list and detector_description are

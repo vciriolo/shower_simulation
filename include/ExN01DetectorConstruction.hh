@@ -44,7 +44,7 @@ class ExN01DetectorConstruction : public G4VUserDetectorConstruction
     ~ExN01DetectorConstruction();
 
     G4VPhysicalVolume* Construct();
-
+G4LogicalVolume* GetScoringVolume() const { return fScoringVolume; }
   private:
     
     // Logical volumes
@@ -61,7 +61,9 @@ class ExN01DetectorConstruction : public G4VUserDetectorConstruction
     G4VPhysicalVolume* absPhys;
     G4VPhysicalVolume* detPhys;    
     G4VPhysicalVolume* outPhys;        
-    G4VPhysicalVolume* mcpPhys;            
+    G4VPhysicalVolume* mcpPhys;   
+
+G4LogicalVolume*  fScoringVolume;         
 };
 
 #endif

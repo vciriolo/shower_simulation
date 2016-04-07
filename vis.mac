@@ -24,26 +24,26 @@
 
 # Draw coordinate axes:
 #/vis/scene/add/axes 0 0 0 0.05 m
-#/vis/scene/add/axes 0 0 0
+/vis/scene/add/axes 0 0 0
 
 
 # Draw smooth trajectories at end of event, showing trajectory points
 # as markers 2 pixels wide:
-#/vis/scene/add/trajectories smooth
-#/vis/modeling/trajectories/create/drawByCharge
-#/vis/modeling/trajectories/drawByCharge-0/default/setDrawStepPts true
-#/vis/modeling/trajectories/drawByCharge-0/default/setStepPtsSize 2
+/vis/scene/add/trajectories smooth
+/vis/modeling/trajectories/create/drawByCharge
+/vis/modeling/trajectories/drawByCharge-0/default/setDrawStepPts true
+/vis/modeling/trajectories/drawByCharge-0/default/setStepPtsSize 2
 # (if too many tracks cause core dump => /tracking/storeTrajectory 0)
 #
 # Draw hits at end of event:
 /vis/scene/add/hits
 #
 # To draw only gammas:
-#/vis/filtering/trajectories/create/particleFilter
+/vis/filtering/trajectories/create/particleFilter
 #/vis/filtering/trajectories/particleFilter-0/add pi-
-#/vis/filtering/trajectories/particleFilter-0/add e-
-#/vis/filtering/trajectories/particleFilter-0/add gamma
-#/vis/filtering/trajectories/particleFilter-0/add opticalphoton
+/vis/filtering/trajectories/particleFilter-0/add e-
+/vis/filtering/trajectories/particleFilter-0/add gamma
+/vis/filtering/trajectories/particleFilter-0/add opticalphoton
 #
 # To invert the above, drawing all particles except gammas,
 # keep the above two lines but also add:
@@ -65,7 +65,7 @@
 
 
 #/units/list
-/gun/energy 0.5 GeV
+#/gun/energy 0.5 GeV
 /gun/particle e-
 #/gun/pos/type Plane
 #/gun/pos/shape Square
@@ -76,4 +76,4 @@
 #/gps/direction 0.0523 0.0523 0.9986
 
 
-/run/beamOn 4
+/run/beamOn 1

@@ -1,0 +1,207 @@
+Geant4 lowenergy data file
+--------------------------
+
+08 Aug 2014  SI G4EMLOW6.40
+                   - removed unused data sets
+
+02 Jun 2014  JS, ZF, LB, SI G4EMLOW6.39
+                   - added sigma_ionisation_(b,be,li)_rudd.dat to dna
+                   - added sigma_ionisation_p_rudd.dat up to 1 GeV to dna
+
+08 May 2014  SP, ZF, SI G4EMLOW6.38
+                   - added sigma_ionisation_si_rudd.dat by ZF to dna
+                   - added fluor_Bearden data by Stéphane Paltani
+
+08 Apr 2014  SI G4EMLOW6.37
+                   - added sigmadiff_cumulated_ionisation_e_born_hp.dat
+                   - added sigmadiff_cumulated_ionisation_p_born_hp.dat
+                   - updated electron inelastic files for Si (microelec) 
+                     by Melanie Raine
+                   - added test cs shell data by Miranda et al. (2014) 
+
+17 Mar 2014  SI G4EMLOW6.36
+                   - added sigmadiff_cumulated_elastic_e_champion_hp.dat
+                     and corresponding ROOT macro 
+                     cumulate-sigmadiff_elastic_e_champion.C
+
+24 Oct 2013  MR, SI G4EMLOW6.35
+                   - updated data for MicroElec processes (microelec
+		   directory)
+
+13 Oct 2013  VI, AI, AB G4EMLOW6.34
+                   - updated data for Compton cross section and 
+                     Livermore bremsstrahlung
+                   - added ESTAR data for electron stopping and ranges 
+
+05 Jun 2013  SI, HT G4EMLOW6.33
+                   - added cumulated diff cross section files for Born
+		     ionisation, including the two ROOT macros for generation
+
+26 Oct 2012  VI   G4EMLOW6.32
+                   - updated data for Seltzer-Berger bremsstrahlung model
+                     obtained from Geant4 Penelope dataset
+                   - updated icru73 ion stopping data with PASS code
+                     computations (main difference for Iron ions -
+                     Bragg peak is lower by about 10%)
+
+16 Oct 2012  MR, SI G4EMLOW6.31
+                   - fixed muelec files 
+
+02 Oct 2012  MR, SI G4EMLOW6.30
+                   - added optimized muelec files 
+
+04 Sep 2012  AT, AM, SI G4EMLOW6.29
+                   - added new ionisation cross section data for 
+                     incident protons and alphas from the work of
+		     A. Taborda et al. 
+
+21 May 2012  VI   G4EMLOW6.28
+                   - brem_SB bremsstarhlung data updated:
+                     Added updated bremsstrahlung data files
+                     with extended grid from NIST (as in Penelope2008);
+                     added probabilities of scattering off electrons
+                     from S.M.Seltzer and M.J.Berger Atom. Data and 
+	             Nucl. Data Tables 35 (1986) 345-418
+
+19 Apr 2012  MR  G4EMLOW6.27
+                  - replaced sigma_inelastic_p_Si.dat and sigmadiff_inelastic_p_Si.dat
+                    in order to fix infinite loop in G4MuElecInelasticModel  
+
+12 Apr 2012  LP  G4EMLOW6.26
+	          - removed unused files from the directory 
+	            penelope/ (used by the obsolete Penelope01 models)
+
+04 Apr 2012  MR, SI G4EMLOW6.25
+                     - added new cross section data files for microdosimetry
+		       models in Si (for electrons, protons, and ions)    
+
+16 Dec 2011  SI  G4EMLOW6.24
+                  - updated high granularity electron 
+		    elastic cross section data 
+
+13 Nov 2011  SI  G4EMLOW6.23
+                  - fixed pixe/ecpssr data
+
+27 Oct 2011  VI  G4EMLOW6.23
+                  - added bremsstrahlung data files into new
+                    sub-directory brem_SB, data are published
+                    in S.M.Seltzer and M.J.Berger Atom. Data and 
+	            Nucl. Data Tables 35 (1986) 345-418
+
+22 Oct 2011  ALF 
+                  - added ecpssr Form Factor calculations from Reis
+
+13 May 2011  SI G4EMLOW6.22
+                 - updated Paul data
+
+25 Mar 2011  SI G4EMLOW6.21
+                 - updated FL2.dat
+
+15 Dec 2010  LP G4EMLOW6.20
+	        - added directory penelope/bremsstrahlung for 
+		G4Penelope08Bremsstrahlung model
+
+03 Nov 2010  SI G4EMLOW6.19
+                 - added extra stopping power data for ions by
+                   V.Ivanchenko, data are obtained from computations
+                   of PASS code by A.Schinner
+
+03 Nov 2010  SI G4EMLOW6.18
+                 - added files provided by Z. Francis
+		 sigma_ionisation_c_rudd.dat
+		 sigma_ionisation_n_rudd.dat
+		 sigma_ionisation_o_rudd.dat
+		 sigma_ionisation_fe_rudd.dat
+		 
+17 Oct 2010  SI G4EMLOW6.17
+                 - updated
+		 sigmadiff_cumulatedshort_elastic_e_champion.dat
+		 sigmadiff_cumulated_elastic_e_champion.dat
+		 sigma_elastic_e_champion.dat
+
+08 Sep 2010  SI G4EMLOW6.16
+                 - added two Geant4-DNA files provides by Z. Francis
+		 sigma_attachment_e_melton.dat
+		 sigma_excitationvib_e_sanche.dat
+
+25 Aug 2010  SI G4EMLOW6.15
+                 - updated G4DNA data tables
+		  sigma_ionisation_h_rudd.dat
+                  sigma_ionisation_p_rudd.dat
+                  sigma_ionisation_he_rudd.dat
+                  sigma_ionisation_alphaplus_rudd.dat
+                  sigma_ionisation_e_born.dat
+                  sigma_ionisation_alphaplusplus_rudd.dat
+                  sigma_excitation_e_born.dat
+                  sigmadiff_ionisation_e_born.dat
+		 
+
+24 Aug 2010  SI G4EMLOW6.14
+                 - added sigma_excitation_e_born.dat for G4DNABornIonisationModel
+
+16 Apr 2010  VI G4EMLOW6.13
+                 - updated PDF.dat (O.Kadri) to msc_GS/
+
+08 Apr 2010  SI G4EMLOW6.12
+                 - added sigmadiff_cumulated_elastic_e_champion.dat to dna/
+
+31 Mar 2010  SI G4EMLOW6.11
+                 - added temporary sigma_excitation_e_born.dat to dna/
+
+17 Mar 2010  LP G4EMLOW6.10
+	         - added data files in the penelope/ directory that are necessary 
+	          for the new Penelope08 models for gamma rays. 
+
+11 Nov 2009  AM, SI   G4EMLOW6.9
+                  -added data tables for PIXE in the directories
+                  uf, kpcsPaul and kacsPaul included in the pixe dir.
+
+04 Nov 2009  AL, SI   G4EMLOW6.8
+                  -Included ICRU 73 stopping powers and revised
+                  tables provided by P. Sigmund/Univ. of Southern Denmark
+		  -Updated Geant4-DNA e- elastic Champion files
+		  -Updated Geant4-DNA e- ionisation Born files
+
+30 Aug 2009  SI   G4EMLOW6.7
+                  -extended high energy coverage of proton excitation and ionization 
+		  -improved precision of e- ionisation Born model
+		  with data files provided by Z Francis.
+		  
+07 Jul 2009  AM   G4EMLOW6.6
+                  Added new directory (pixe) and data files needed
+                  by ionisation cross section models for PIXE
+
+29 Apr 2009  SI   G4EMLOW6.5
+                  Extended energy range of Champion e- elastic scattering
+		  model from 10 keV up to 10 MeV
+
+23 Mar 2009  LP   G4EMLOW6.4
+		  Corrected ioni/ion-sp-38.dat, ioni/ion-sp-56.dat and 
+                  ioni/ion-sp-57.dat [corrupted data files]
+                  Bug report 1042.
+
+17 Mar 2009  VI   G4EMLOW6.3
+		  Added msc_GS/ files
+
+28 Oct 2008  SI   G4EMLOW6.2
+                  Added in dna/ tables for 
+                  - Champion elastic scattering model
+                  - Champion Positronium creation model
+
+14 Oct 2007  MGP  G4EMLOW5.0
+                  Added dna/ directory for Geant4-DNA data tables
+                  Tables provided by Sebastien Incerti, renamed by MGP
+
+10 Oct 2007  MGP  G4EMLOW4.4
+                  Replaced binding.dat provided by Alfonso Mantero
+
+14 May 2007  MGP  G4EMLOW4.3
+                  Added auger file au-tr-pr-100.dat provided by
+                  Alfonso Mantero
+
+18 Dec 2006  MGP  G4EMLOW4.2
+                  Corrected wrong format in some atomic relaxation files
+
+19 Oct 2006  MGP  G4EMLOW4.1
+                  Replaced auger directory with new one provided by
+                  Alfonso Mantero, containing bug fixes

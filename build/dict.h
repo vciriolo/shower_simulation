@@ -31,7 +31,7 @@ extern void G__set_cpp_environmentdict();
 
 #include "TObject.h"
 #include "TMemberInspector.h"
-#include "/afs/cern.ch/user/n/ntrevisa/geant4/shower/include/STLDict.hh"
+#include "/afs/cern.ch/user/v/vciriolo/work/private/shower/include/STLDict.hh"
 #include <algorithm>
 namespace std { }
 using namespace std;

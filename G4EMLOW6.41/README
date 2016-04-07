@@ -1,0 +1,228 @@
+Low Energy Electromagnetic models data files
+============================================
+
+    *********************************************************************
+    * DATA ARE *NOT* FOR COMMERCIAL USE AND MUST BE USED WITHIN GEANT4  *
+    *********************************************************************
+
+====================================================================================  
+
+Directory Description
+=====================
+
+*** Photon processes ***
+
+compton effect (comp):
+
+   ce-cs-NN.dat      = integral cross sections    (EPDL97)
+   ce-sf-NN.dat      = scattering functions       (EPDL97)
+
+gamma conversion (pair): pair + triplet production, interpolated and summed
+
+   pp-cs-NN.dat      = integral cross sections    (EPDL97)
+
+gamma conversion (pairdata): pair production
+
+   pp-pair-cs-NN.dat = integral cross sections    (EPDL97)
+
+gamma conversion (tripdata ): triplet production
+
+   pp-trip-cs-NN.dat = integral cross sections    (EPDL97)
+
+photoelectric effect (phot): 
+ 
+   pe-cs-NN.dat      = integral cross sections    (EPDL97) 
+   pe-ss-cs-NN.dat   = subshell cross sections    (EPDL97)
+
+rayleigh effect (comp):
+
+   re-cs-NN.dat      = integral cross sections    (EPDL97)
+   re-ff-NN.dat      = form factors               (EPDL97)
+
+
+*** Electron processes ***
+
+bremstrahlung (brem):
+
+   br-cs-NN.dat      = integral cross sections                        (EEDL)   
+   br-co-a.dat       = photon energy spectrum formula coefficient     (EEDL)  (+)
+   br-co-b.dat       = photon energy spectrum formula coefficient     (EEDL)  (+)
+
+ionisation (ioni):
+
+   ion-ss-cs-NN.dat   = subshell cross sections
+   ion-co-NN.dat      = delta ray energy spectrum formula coefficient (EEDL)  (+)
+   io-co-NN.dat       = delta ray energy spectrum formula coefficient (EEDL)  (+)
+
+coefficient for ionisation are obtained fitting delta ray spectrum with two functions
+
+   * ion-co-NN.dat structure 
+
+		column     type of data
+
+		  1         incoming electron energy
+
+                 2-7        first formula coefficients sum_i(A_i/(Energy+Binding)^i)
+
+                  8         second formula coefficient  C_i/Energy^2
+
+                  9         maximum of the rejection part of the first formula: 
+                            sum_i(A_i/(Energy+Binding)^(i-1))
+
+                10-11       subarea1 and subarea2 covered by the two formulas
+
+		 12         separation cut 	    			
+
+   * io-co-NN.dat structure (new fits with up to three functions)
+
+		column     type of data
+
+		  1         incoming electron energy
+
+                 2-7        first formula coefficients sum_i(A_i/(Energy+Binding)^i) i=2,7
+
+                  8         maximum of the rejection part of the first formula: 
+                            sum_i(A_i/(Energy+Binding)^(i-1))
+
+                 9-12       third formula coefficients sum_i(A_i/(Energy+Binding)^i) i=2,5
+
+                 13         maximum of the rejection part of the first formula: 
+                            sum_i(A_i/(Energy+Binding)^(i-1))
+
+		14-15       second formula coefficient: C1*Energy^C2 
+
+		 16         1st separation cut 	    			
+
+		 17         2nd separation cut 	    			
+
+each set of data in a file corresponding to subshells is separated by a line of -1.
+The order of the functions 1st,2nd,3rd follows the increasing energy in which they are used
+even if the second formula is the less used. (see Physics Reference Manual)
+   
+*** Atomic relaxation ***
+
+fluorescence (fluor):
+
+   fl-tr-pr-NN.dat   = radiative transition probabilities             (EADL)
+   binding.dat       = binding energies                               (EADL)  
+
+fluorescence based on Bearden data (fluor_Bearden), by Stephane Paltani:
+
+   fl-tr-pr-NN.dat   = radiative transition probabilities             (from Bearden)
+   fl-tr-pr-NN.commented.dat = same including comments                (from Bearden)
+   binding.dat       = binding energies                               (EADL)  
+
+auger effect (auger):
+   au-tr-pr-NN.dat   = non-radiative transition probabilities         (EADL)
+
+* NN = ATOMIC NUMBER
+
+*** Geant4-DNA processes ***
+
+All cross section data files are located in the dna directory.
+
+If you use the Geant4-DNA extension, please cite the following reference paper:
+"Comparison of Geant4 very low energy cross section models with experimental data in water", 
+Med. Phys. 37 (2010) 4692-4708
+
+Please refer to http://geant4-dna.org for more details and other publications.
+
+*** Microelec processes ***
+
+All files are located in the microelec directory.
+
+If you use these processes, please cite:
+
+A. Valentin, M. Raine and J.-E. Sauvestre, 
+"Inelastic cross-sections of low-energy electrons in silicon for the 
+simulation of heavy ion tracks with the GEANT4-DNA toolkit",  
+http://dx.doi.org/10.1109/NSSMIC.2010.5873720
+
+A. Valentin, M. Raine, J.-E. Sauvestre, M. Gaillardin and P. Paillet, 
+"Geant4 physics processes for microdosimetry simulation: very low energy 
+electromagnetic models for electrons in silicon", 
+Nuclear Instruments and Methods in Physics Research B, vol. 288, pp. 66 - 73, 2012. 
+http://dx.doi.org/10.1016/j.nimb.2012.07.028
+
+A. Valentin, M. Raine, M. Gaillardin and P. Paillet, 
+"Geant4 physics processes for microdosimetry simulation: very low energy 
+electromagnetic models for protons and heavy ions in silicon", 
+Nuclear Instruments and Methods in Physics Research B, vol. 287, pp. 124 - 129, 2012. 
+http://dx.doi.org/10.1016/j.nimb.2012.06.007
+
+M. Raine, A. Valentin, M. Gaillardin and P. Paillet, 
+"Improved simulation of ion track structures using new Geant4 models 
+- Impact on the modeling of advanced technologies response ", 
+IEEE Transactions on Nuclear Science, vol. 59, pp. 2697 - 2703, 2012. 
+http://dx.doi.org/10.1109/TNS.2012.2220783
+
+*** PIXE data files ***
+
+All cross section data files needed for PIXE with protons and alphas are stored in the
+ecpssr, uf, kpcsPaul, kacsPaul and exp directories located in the pixe directory.
+
+* Data in the pixe/ecpssr subdirectory are derived from the work of :
+
+- A. Taborda et al.,
+"Polynomial approximation to universal ionisation cross-sections of K and L shells induced by H and He ion beams"
+Published in X-Ray Spectrom. 2011, 40, 127-134
+
+- A. Taborda et al.,
+"Polynomial approximation to universal M-shell ionisation cross sections"
+Published in X-Ray Spectrom. 2013, 42, 177-182
+
+*** Ion processes ***
+
+ionization (ion_stopping_data/icru73):
+ 
+   zZZ_MAT.dat       = mass stopping powers from ICRU 73 tables and revised
+                       tables provided by P. Sigmund/Univ. of Southern Denmark
+                       (revised tables are: G4_WATER (all considered ions), 
+                       G4_WATER_VAPOR (all considered ions), G4NYLON-6-6
+                       (F ions), G4_Cu (all considered ions))
+
+                       File name definition:
+                         * Elemental targets: zZZ_YY.dat
+                                               ZZ = ion atomic number
+                                               YY = atomic number of material
+                         * Compound materials: zZZ_NAME.dat
+                                               ZZ = ion atomic number
+                                               YY = material name 
+
+                       File content:
+                         Format readable by G4LPhysicsFreeVector, data in
+                         ICRU 73 units:
+                           1st column: Energy per nucleon in MeV
+                           2nd column: Mass stopping power in MeV*cm2/(mg)
+
+*** Seltzer-Berger data for bremsstrahlung cross section ***
+    Atom. Data and Nucl. Data Tables 35 (1986) 345-418
+
+bremsstarhlung (brem_SB):
+ 
+   brZZ       = cross sections per element (Z=1-100) in a format of 2-D
+                vector which can directly retrieved by G4Physics2DVector
+                class; 
+
+==================================================================================
+
+Photoelectric Angular Majorant Surface Directory Description
+
+photoelectric angular majorant surface distribution (photoelectric_angular)
+
+ftab0.dat <- Majorant surface distribution for K-shell
+ftab1.dat <- Majorant surface distribution for L-shells
+
+====================================================================================
+
+The cited Livermore data libraries are:
+
+-- EPDL97  Evaluated Photon Data Library 
+-- EEDL    Evaluated Electron Data Library 
+-- EADL    Evaluated Atom Data Library
+
+(see http://www.llnl.gov/cullen1/)
+
+-- The data have been reformatted for usage in Geant4 and the files(+) 
+contain values resulting from fitting the original data. 
+

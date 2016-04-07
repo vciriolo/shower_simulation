@@ -37,6 +37,7 @@
 
 #include "ExN01RandomGenerator.hh"
           
+#include "G4SystemOfUnits.hh"          
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 ExG4PrimaryGeneratorAction01::ExG4PrimaryGeneratorAction01(std::string call, float gev) : G4VUserPrimaryGeneratorAction(),fParticleGun(0)
@@ -65,6 +66,7 @@ void ExG4PrimaryGeneratorAction01::GeneratePrimaries(G4Event* anEvent)
 
   // default particle kinematic
   const G4String& particleName = "e-";
+  //const G4String& particleName = "mu-";
   G4float energy;
   G4ThreeVector position(posx,posy,-10.*cm);
   G4ThreeVector momentumDirection(0.,0.,1.);

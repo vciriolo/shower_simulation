@@ -53,7 +53,7 @@
 
 #include "G4hIonisation.hh"
 
-
+#include "G4SystemOfUnits.hh"
 #include "G4ParticleDefinition.hh"
 #include "G4ProcessManager.hh"
 #include "G4ProcessVector.hh"
@@ -65,7 +65,7 @@
 
 ExN01PhysicsList::ExN01PhysicsList():  G4VUserPhysicsList()
 {
- defaultCutValue = 1.0*mm;
+ defaultCutValue = 0.1*cm;
  SetVerboseLevel(1);
 }
 
@@ -308,8 +308,8 @@ void ExN01PhysicsList::SetCuts()
   //   the default cut value for all particle types 
   SetCutsWithDefault();   
   
-  G4double cutForGamma = 0.2500 * mm; 
-  G4double cutForElectron = 0.500 * mm;
+  G4double cutForGamma = 0.0250 * cm; 
+  G4double cutForElectron = 0.050 * cm;
   SetCutValue(cutForGamma, "gamma"); 
   SetCutValue(cutForElectron,"e-"); 
   SetCutValue(cutForElectron,"e+"); 

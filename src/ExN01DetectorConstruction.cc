@@ -29,7 +29,7 @@
 //
 
 #include "ExN01DetectorConstruction.hh"
-
+#include "G4SystemOfUnits.hh"
 #include "G4Material.hh"
 #include "G4Box.hh"
 #include "G4Tubs.hh"
@@ -54,7 +54,7 @@ G4double abs_hy = 0.1*m;
 */
 
 //Pb
-
+//double X_0 = 0.0143;       //Cu
 double X_0 = 0.0056 ;       //Pb (X_0 = 0.0056, but absorber thickness is 0.004)
 G4double abs_hx = 0.3*m;
 G4double abs_hy = 0.3*m;
@@ -100,6 +100,8 @@ G4Element* elO  = new G4Element(name="Oxygen"  ,symbol="O" , z= 8., a);
 density = 2.33*g/cm3;
 a = 28.0855*g/mole;
 G4Element* elSi  = new G4Element(name="Silicon"  ,symbol="Si" , z= 14., a);
+G4Material* matSi = new G4Material(name="Silicon",density,ncomponents=1);
+matSi->AddElement(elSi, natoms=1);
 
 //defining N and N2
 density = 0.001251*g/cm3;
@@ -134,6 +136,9 @@ PbO->AddElement(elO, natoms=1);
 density = 5.12*g/cm3;
 G4Material* LeadGlass = new G4Material(name="LeadGlass",density,ncomponents=2);
 
+//defining silicon material
+
+
 LeadGlass->AddMaterial(PbO, fractionmass=40.*perCent);
 LeadGlass->AddMaterial(SiO2, fractionmass=60.*perCent);  
   
@@ -150,7 +155,7 @@ G4PVPlacement* worldPhys = new G4PVPlacement(0,G4ThreeVector(),worldLog,"World",
 
 //defining first absorber: X0
 
-G4double abs_hz = 0.5*X_0*m;
+G4double abs_hz = 2*0.5*X_0*m;
 
 G4Box* absBox = new G4Box("Abs", abs_hx, abs_hy, abs_hz);
 
@@ -159,12 +164,14 @@ G4LogicalVolume* absLog = new G4LogicalVolume(absBox, Pb, "Abs");
 
 G4double pos_x =  0.0*meter;
 G4double pos_y =  0.0*meter;
-G4double pos_z =  0.5*n*X_0*meter;
+//G4double pos_z =  4.*0.5*n*X_0;//+0.1*meter;
+G4double pos_z =  0.1 * meter;
+//G4double pos_z =  0.20*meter;
 
 G4PVPlacement* absPhys = new G4PVPlacement(0,G4ThreeVector(pos_x, pos_y, pos_z),absLog,"Abs",worldLog,false,0);
 
 //defining second absorber: 2*X0
-
+/*
 abs_hz = X_0*m;
 
 G4Box* absBox_2 = new G4Box("Abs2", abs_hx, abs_hy, abs_hz);
@@ -174,12 +181,32 @@ G4LogicalVolume* absLog_2 = new G4LogicalVolume(absBox_2, Pb, "Abs");
 
 pos_x =  0.0*meter;
 pos_y =  0.0*meter;
-pos_z =  2.*n*X_0*meter + 2*mcp_z*0.001*meter + 2.*cm;
+pos_z = 2.*meter;
+//pos_z =  2.*n*X_0*meter+0.01*meter;
+//pos_z =  2.*n*X_0*meter + 2*mcp_z*0.001*meter + 2.*cm;
 
 G4PVPlacement* absPhys_2 = new G4PVPlacement(0,G4ThreeVector(pos_x, pos_y, pos_z),absLog_2,"Abs2",worldLog,false,0);
 
-//defining first mcp 
 
+//defining third absorber: 3*X0
+
+abs_hz = X_0*m;
+
+G4Box* absBox_3 = new G4Box("Abs3", abs_hx, abs_hy, abs_hz);
+
+//G4LogicalVolume* absLog_2 = new G4LogicalVolume(absBox_2, Cu, "Abs2");
+G4LogicalVolume* absLog_3 = new G4LogicalVolume(absBox_3, Pb, "Abs");
+
+pos_x =  0.0*meter;
+pos_y =  0.0*meter;
+pos_z = 3.*meter;
+//pos_z =  3.*n*X_0*meter + 0.01*meter;
+
+G4PVPlacement* absPhys_3 = new G4PVPlacement(0,G4ThreeVector(pos_x, pos_y, pos_z),absLog_3,"Abs3",worldLog,false,0);
+*/
+
+//defining first mcp 
+/*
 G4double innerRadius = 0.*cm;
 G4double outerRadius = 0.3*m;;
 G4double hz = 0.26*mm;
@@ -187,19 +214,36 @@ G4double startAngle = 0.*deg;
 G4double spanningAngle = 360.*deg;
 
 pos_z = (X_0 + mcp_z*0.001)*meter + 1.*cm;// + 1.*meter;
-
 G4Tubs* mcpTube = new G4Tubs("mcp", innerRadius, outerRadius, mcp_z, startAngle, spanningAngle);
 G4LogicalVolume* mcpLog = new G4LogicalVolume(mcpTube, LeadGlass, "mcp");
 
 G4PVPlacement* mcpPhys_1 = new G4PVPlacement(0,G4ThreeVector(pos_x, pos_y, pos_z),mcpLog,"mcp",worldLog,false,0);
-
+*/
 //defining second mcp 
 
-pos_z = (3*X_0 + 3.*mcp_z*0.001)*meter + 3.*cm;
+G4double innerRadius = 0.*cm;
+//G4double outerRadius = 0.02*m;;
+//G4double outerRadius = 0.0039*m;;
+//G4double outerRadius = 0.56*cm;
+G4double outerRadius = 0.39*cm;
+G4double hz = 0.15*mm;
+G4double startAngle = 0.*deg;
+G4double spanningAngle = 360.*deg;
+
+//G4double pos_x = 0.*meter;
+//G4double pos_y = 0.*meter; 0.1112
+//pos_z = 0.065*meter - 4*0.5*X_0*2 *meter - 0.01*meter * 0.5* 0.0056 * meter + 1.5 * 2.5 * X_0 * meter - 0.005 * meter;//+ 0.000160*meter;// + 0.001*meter;      //no absorber
+//pos_z = 0.1196 * meter + 
+pos_z = 0.133* meter;
+//pos_z = 5.0*0.5*X_0*meter + 0.5*X_0*meter+0.01*meter;  //X0!=0
+//pos_z = (5.*X_0 + 4.*mcp_z*0.001)*meter + 4.*cm;
+G4Tubs* mcpTube = new G4Tubs("mcp2", innerRadius, outerRadius, hz, startAngle, spanningAngle);
+G4LogicalVolume* mcpLog = new G4LogicalVolume(mcpTube, matSi, "mcp2");
 
 G4PVPlacement* mcpPhys_2 = new G4PVPlacement(0,G4ThreeVector(pos_x, pos_y, pos_z),mcpLog,"mcp2",worldLog,false,0);
  
-//defining calorimeter
+//defining calorimeter   
+/*
 
 abs_hz = 12.5*X_0*m;
 
@@ -213,7 +257,7 @@ pos_y =  0.0*meter;
 pos_z =  15.5*n*X_0*meter + 3*mcp_z*0.001*meter + 4.*cm;
 
 G4PVPlacement* CaloPhys = new G4PVPlacement(0,G4ThreeVector(pos_x, pos_y, pos_z),CaloLog,"Calo",worldLog,false,0); 
-
+*/
   //------------------------------------------------------------------
 
   return worldPhys;

@@ -1,5 +1,7 @@
 To get the code type:
 
+The simulation measures the energy deposited inside the sensor by the shower. 
+This can be divided by the energy deposited by a MIP in order to get the number of equivalent MIPs going through the sensor in case of a shower.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The source to set geant4 working are:

@@ -18,3 +18,4 @@ export PYTHIA8=/afs/cern.ch/cms/slc6_amd64_gcc472/external/pythia8/175-cms2/
 export PYTHIA8DATA=/afs/cern.ch/cms/slc6_amd64_gcc472/external/pythia8/175-cms2/xmldoc
 export LHAPDF=/afs/cern.ch/sw/lcg/external/MCGenerators/lhapdf/5.8.9/x86_64-slc6-gcc46-opt/lib/
 export LHAPATH=/afs/cern.ch/sw/lcg/external/MCGenerators/lhapdf/5.8.9/share/lhapdf/PDFsets
+export CXX=`which g++`; export CC=`which gcc` 
